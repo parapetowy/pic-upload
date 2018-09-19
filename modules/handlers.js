@@ -42,10 +42,14 @@ exports.error = function(request, response) {
 
 exports.show = function(request, response) {
     fs.readFile("test.png", "binary", function(error, file) {
+        if (error) {
+            console.log('Error - ' + error)
+        } else {
         response.writeHead(200, {
             "Content-Type": "image/png"
         });
         response.write(file, "binary");
         response.end();
+        }
     });
 }
